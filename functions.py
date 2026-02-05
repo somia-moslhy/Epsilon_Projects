@@ -6,10 +6,10 @@ def take_names(players,num_of_players):
     for i in range(num_of_players):
         name=input(f"Enter name for Player {i+1}: ")
         # using Dict for Inventory for o(1) access
-        players[name]={"Health":100,"coins":100,"inv":{}}
+        players[name]={"health":100,"coins":100,"inv":{}}
 
 
-def take_bids(players):
+def take_bids(players,bids):
     """
     Takes bids from players for the current itme.
     validates that the player has enough coins.
@@ -23,7 +23,7 @@ def take_bids(players):
                     bid=int(bid_input)
 
                     if bid <= data["coins"]:
-                        data["bid"]=bid
+                        bids[name]=bid
                         break
                     else:
                         print(f"Not enough cions! You only have {data['coins']} coins.")
@@ -36,7 +36,7 @@ def system_game(players, disaster, damage,day,item_needed):
     Updates health and item durability.
     """
     for name,data in players.items():
-        if data["health"]>0:
+        if data["health"]<=0:
             continue
 
         # Logic: Check directly in the inv dict
